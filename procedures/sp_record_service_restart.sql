@@ -16,11 +16,11 @@ BEGIN
   
   if (entry_exists = 0) then
     insert into service_status (service_name, status, status_str, restart_time)
-    values (s_service_name, 'Restart', 'Restart', UTC_TIMESTAMP());
+    values (s_service_name, 1, 'Restart', UTC_TIMESTAMP());
   else
     update service_status
     set 
-      status = 'Restart',
+      status = 1,
       status_str = 'Restart',
       restart_time = UTC_TIMESTAMP()
     where
