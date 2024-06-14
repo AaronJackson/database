@@ -9,8 +9,8 @@ CREATE PROCEDURE sp_log_event
 SQL SECURITY DEFINER
 BEGIN
 
-  insert into events (type, value)
-  values (p_event_type, p_event_value);
+  insert into events (time, type, value)
+  values (UTC_TIMESTAMP(), p_event_type, p_event_value);
 
 END //
 DELIMITER ;
