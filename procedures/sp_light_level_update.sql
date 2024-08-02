@@ -11,17 +11,19 @@ BEGIN
   declare sensor_exists int;
   set sensor_exists = 0;
   
-  select count(*) into sensor_exists
-  from light_level l
-  where l.sensor = sensor;
+  SELECT count(*) into sensor_exists
+  FROM light_level l
+  WHERE l.sensor = sensor;
   
   if (sensor_exists = 1) then
-    update light_level
-    set reading = light_level
-    where light_level.sensor = sensor;
+    UPDATE light_level
+    SET
+      reading = light_level,
+      time = UTC_TIMESTAMP()
+    WHERE light_level.sensor = sensor;
   else
-    insert into light_level (sensor, reading)
-    values (sensor, light_level);
+    INSERT INTO light_level (sensor, reading)
+    VALUES (sensor, light_level);
   end if;
 
 END //
